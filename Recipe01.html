@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+      <h2>Choppy's Restaurant</h2>
+      <ul>
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/menu">Menu</router-link></li>
+        <li><router-link to="/bar">Bar</router-link></li>
+      </ul>
+      <router-view></router-view>
+    </div>
+  
+    <script>
+
+      Vue.use(VueRouter)
+      const Home = { template: '<div>Welcome to Choppy</div>'}
+      const Menu = { template: '<div>Today we have cookies</div>'}
+      const Bar = { template: '<div>We serve cocktails</div>'}
+      
+      const router = new VueRouter({
+        routes: [
+          { path: '/', component: Home },
+          { path: '/menu', component: Menu },
+          { path: '/bar', component: Bar}
+        ]
+      })
+
+      new Vue({
+        router,
+        el: '#app',
+      });
+
+    
+    </script>
+  </body>
+</html>

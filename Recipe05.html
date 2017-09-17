@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+
+    <div id="app">
+      <h2>Kindoms Encyclopedia</h2>
+      <router-link to="/user/Stark/">Stark</router-link>
+      <router-link to="/user/Lannister/">Lannister</router-link>
+      <router-view></router-view>
+    </div>
+
+    <script>
+
+      Vue.use(VueRouter)
+
+      const Soldiers = { template: `
+        <div>
+          <span v-for="soldier in $root[$route.params.id].soldiers">🔪</span>
+        </div>
+      `}
+
+      const Gold = { template: `
+        <div>
+          <span v-for="soldier in $root[$route.params.id].gold">💰</span>
+        </div>
+      `}
+
+      const User = { template: `
+        <div class="user">
+          <h2>Kindoms Encyclopedia</h2>
+          User {{$route.params.id}}
+          <router-link to="gold">Gold</router-link>
+          <router-link to="soldiers">Soldiers</router-link>
+          <router-view></router-view>
+        </div>
+      `}
+
+      const router = new VueRouter({
+        routes: [
+          { path: '/user/:id',
+            component: User,
+            children: [
+              {
+                path: 'soldiers',
+                component: Soldiers
+              },
+              {
+                path: 'gold',
+                component: Gold
+              }
+            ]
+          }
+        ]
+      })
+
+      new Vue({
+        router,
+        el: '#app',
+        data: {
+          Stark: {
+            soldiers: 100,
+            gold: 50
+          },
+          Lannister:{
+            soldiers: 50,
+            gold: 100
+          }
+        }
+      });
+
+    </script>
+  </body>
+</html>
