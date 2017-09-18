@@ -5,7 +5,7 @@
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   </head>
   <body>
-  
+
     <div id="app">
       <h2>Choppy's Restaurant</h2>
       <ul>
@@ -15,14 +15,14 @@
       </ul>
       <router-view></router-view>
     </div>
-  
+
     <script>
 
       Vue.use(VueRouter)
       const Home = { template: '<div>Welcome to Choppy</div>'}
       const Menu = { template: '<div>Today we have cookies</div>'}
       const Bar = { template: '<div>We serve cocktails</div>'}
-      
+
       const router = new VueRouter({
         routes: [
           { path: '/', component: Home },
@@ -36,7 +36,7 @@
         el: '#app',
       });
 
-    
+
     </script>
   </body>
 </html>
